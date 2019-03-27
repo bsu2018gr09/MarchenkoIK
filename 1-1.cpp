@@ -1,4 +1,4 @@
-﻿/*
+﻿/*1-1
 Даны точки плоскости своими координатами в виде двух одномерных массивов (случайные числа).
 Точки плоскости рассортировать по возрастанию расстояния до прямой ax + by + c = 0.
 */
@@ -30,6 +30,7 @@ int main()
 	cin >> a >> b >> c;
 	int *X = InitArr(N);
 	int *Y = InitArr(N);
+	/**void giveMemory(int*&A, int N)*/
 	randArr(X, N, -N / 2, N / 2);
 	randArr(Y, N, -N / 2, N / 2);
 	cout << "The array is filled with random numbers" << '\n';
@@ -43,6 +44,15 @@ int main()
 	freeMemory(D);
 	system("pause");
 }
+
+/*void giveMemory(int*&A, int N)
+{
+	A = new(nothrow)int[N];
+	if (!A) 
+	{
+		cout << "error" << "\n";
+	}
+}*/
 
 void randArr(int*A, int N, int l, int r) {
 	if (!A) {
