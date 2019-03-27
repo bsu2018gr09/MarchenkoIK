@@ -1,4 +1,4 @@
-﻿// 1-2.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
+﻿// 1-2
 //
 
 //Положительные элементы массива А(N) переставить в конец массива, сохраняя порядок следования.//
@@ -11,54 +11,10 @@
 using namespace std;
 
 //Функции//
-void givememory(int*&a, int n);
-void randominitarray(int *a, int n, int min, int max);
-void printarray(int *a, int n);
-void deletememory(int*a);
-
-//выделение памяти
-
-void givememory(int*&a, int n)
-{
-	a = new(nothrow)int[n];
-	if (!a) 
-	{
-		cout << "error" << "\n";
-	}
-}
-
-//инициализируем массив
-
-void randominitarray(int *a, int n, int min, int max)
-{ 
-	srand(time(0));
-	max++;
-	int tmp = max - min;
-	for (int i = 0; i < n; i++; ++a)
-	{
-		*(a) = rand() % tmp + min;
-	}
-}
-
-
-
-//печать массива
-void printarray(int*  a, int n)
-{
-	for (int i = 0; i < n; ++i)
-	{
-		cout << *(a++) << " ";
-	}
-	cout << '\n';
-}
-
-
-
-//освобождение памяти
-void deletememory(int*a)
-{
-	delete a;
-}
+void giveMemory(int*&a, int n);
+void rand(int *a, int n, int min, int max);
+void printArr(int *a, int n);
+void freeMemory(int*a);
 
 int main()
 {
@@ -91,5 +47,44 @@ int main()
 	printarray(a, n);
 	deletememory(a);
 }
+
+//выделение памяти
+void giveMemory(int*&a, int n)
+{
+	a = new(nothrow)int[n];
+	if (!a) 
+	{
+		cout << "error" << "\n";
+	}
+}
+
+//рандомное заполнение
+void rand(int *a, int n, int min, int max)
+{ 
+	srand(time(0));
+	max++;
+	int tmp = max - min;
+	for (int i = 0; i < n; i++; ++a)
+	{
+		*(a) = rand() % tmp + min;
+	}
+}
+
+//печать массива
+void printArr(int*  a, int n)
+{
+	for (int i = 0; i < n; ++i)
+	{
+		cout << *(a++) << " ";
+	}
+	cout << '\n';
+}
+
+//освобождение памяти
+void freeMemory(int*a)
+{
+	delete[]a;
+}
+
 
 //P.S. Функции инициализации и печати честно скоммуниждены из прошлых работ. Функция сортировки работала некорректно. Сделал так.
