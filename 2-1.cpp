@@ -17,16 +17,16 @@ int main()
    cout << "INPUT:\n";
    cin >> n >> m;
 
-   int **a = new int*[n];
+   int **a = new int*[n];// где проверка? Почему не в отдельной процедуре????
    for (int i = 0; i < n; i++)
-      a[i] = new int[m];
+      a[i] = new int[m];// где проверка? Почему не в отдельной процедуре????
 
    for (int i = 0; i < n; i++)
    {
       for (int j = 0; j < m; j++)
       {
          a[i][j] = rand() % 19 - 9;
-         cout << setw(2) << a[i][j] << " ";
+         cout << setw(2) << a[i][j] << " ";//  Почему не в отдельной процедуре????
       }
       cout << endl;
    }
@@ -36,7 +36,7 @@ int main()
    {
 	   for (int j = 0; j < m; j++)
 	   {
-		   mmin = min(a[i][j], mmin);
+		   mmin = min(a[i][j], mmin);//  Почему не в отдельной процедуре????
 	   }
    }
    for (int i = 0; i < n; i++)
