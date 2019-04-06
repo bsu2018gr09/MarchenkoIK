@@ -1,4 +1,4 @@
-﻿#define _CRT_SECURE_NO_WARNINGS
+﻿#define _CRT_SECURE_NO_WARNINGS//где условие?
 #include "pch.h"
 #include <iostream> 
 #include <sstream> 
@@ -26,7 +26,7 @@ int main()
 		int Len = strcspn(p, Str1); 
 		if (Len == 0)
 			break;
-		if (Len == 4)
+		if (Len == 4)// что за 4???? магическое число?
 		{
 			strncpy(temp, p, Len);
 			temp[Len] = '\0';
@@ -38,11 +38,11 @@ int main()
 
 	cout << "quantity of words=" << k << endl;
 	
-*/ 	char *word = new char[MAX], *word2 = new char[MAX];
+*/ 	char *word = new char[MAX], *word2 = new char[MAX];//new есть, проверки нет????
 	cin.getline(word, MAX);
 	
 	cin.getline(word2, MAX);
-	char *text = new char[MAX]
+	char *text = new char[MAX]//new есть, проверки нет????
 		cin.getline(text, MAX);
 	while (char *p = strstr(text, word))
 		while (*p++ = *word2++);
