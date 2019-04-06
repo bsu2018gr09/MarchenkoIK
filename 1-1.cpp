@@ -16,8 +16,8 @@ void Dist(int*X, int*Y, int*D, int N, int a, int b, int c);
 void Sort(int*X, int*Y, int*D, int N);
 void printArr(int*A, int*B, int*D, int N);
 
-int *InitArr(int N) {
-	int *A = new int[N];
+int *InitArr(int N) { //Где тут инициализация?????
+	int *A = new int[N];//где проверка???
 	return A;
 }
 
@@ -75,7 +75,7 @@ void Dist(int*X, int*Y, int*D, int N, int a, int b, int c)
 	}
 }
 
-void Sort(int*X, int*Y, int*D, int N)
+void Sort(int*X, int*Y, int*D, int N)//почему сортировка без оптимизации?????
 {
 	for (int i = 0; i < N - 1; i++)
 	{
