@@ -24,20 +24,20 @@ int main() {
 	unsigned int w, h;
 
 	cout << "Cin step: ";
-	cin >> st;
+	cin >> st; // не компилируется
 
 	cout << "Cin start color: ";
 	cin >> r1 >> g1 >> b1; 
 
 	cout << "Cin finish color: ";
-	cin >> r2 >> g2 >> b2; 
+	cin >> r2 >> g2 >> b2; // не компилируется
 
 	c.r = r1;
 	c.g = g1;
 	c.b = b1;
 	tmp_r1 = r1, tmp_g1 = g1, tmp_b1 = b1;
 
-	f.read((char *)&buf, 18);
+	f.read((char *)&buf, 18); // не компилируется
 	g.write((char *)&buf, 18);
 	f.read((char *)&w, 4); cout << "w=" << w;
 	f.read((char *)&h, 4); cout << ", h=" << h;
