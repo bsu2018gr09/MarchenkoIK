@@ -10,16 +10,17 @@
 
 using namespace std;
 
+int *giveMemory(int);
 void randArr(int*A, int N, int l, int r);
 void freeMemory(int*A);
 void Dist(int*X, int*Y, int*D, int N, int a, int b, int c);
 void Sort(int*X, int*Y, int*D, int N);
 void printArr(int*A, int*B, int*D, int N);
 
-int *InitArr(int N) { //Где тут инициализация?????
+/*int *InitArr(int N) { //Где тут инициализация?????
 	int *A = new int[N];//где проверка???
 	return A;
-}
+}*/
 
 int main()
 {
@@ -28,14 +29,13 @@ int main()
 	cin >> N;
 	cout << "Input a, b, c for ax+by+c=0" << '\n';
 	cin >> a >> b >> c;
-	int *X = InitArr(N);
-	int *Y = InitArr(N);
-	/**void giveMemory(int*&A, int N)*/
+	int *X = giveMemory(N);
+	int *Y = giveMemory(N);
 	randArr(X, N, -N / 2, N / 2);
 	randArr(Y, N, -N / 2, N / 2);
 	cout << "The array is filled with random numbers" << '\n';
 	Sleep(1000);
-	int *D = InitArr(N);
+	int *D = giveMemory(N);
 	Dist(X, Y, D, N, a, b, c);
 	Sort(X, Y, D, N);
 	printArr(X, Y, D, N);
@@ -45,14 +45,16 @@ int main()
 	system("pause");
 }
 
-/*void giveMemory(int*&A, int N)
+
+int *giveMemory(int N)
 {
-	A = new(nothrow)int[N];
-	if (!A) 
+	int *A = new(nothrow)int[N];
+	if (!A)
 	{
 		cout << "error" << "\n";
 	}
-}*/
+	return A;
+}
 
 void randArr(int*A, int N, int l, int r) {
 	if (!A) {
@@ -71,21 +73,24 @@ void Dist(int*X, int*Y, int*D, int N, int a, int b, int c)
 {
 	for (int i = 0; i < N; i++)
 	{
-		*(D + i) = abs(a**(X + i) + b * *(Y + i) + c) / sqrt(a*a + b * b);
+		D[i] = abs(a * X[i] + b * Y[i] + c) / sqrt(a*a + b * b);
 	}
 }
 
-void Sort(int*X, int*Y, int*D, int N)//почему сортировка без оптимизации?????
+void Sort(int*X, int*Y, int*D, int N)
 {
 	for (int i = 0; i < N - 1; i++)
 	{
 		for (int j = 0; j < N - i - 1; j++)
 		{
-			if (*(D + j) > *(D + j + 1))
+			if (D[i] > D[j + 1])
 			{
-				swap(*(X + j), *(X + j + 1));
+				swap(X[i], X[i + 1]);
+				swap(Y[i], Y[i + 1]);
+				swap(D[i], D[i + 1]);
+				/*swap(*(X + j), *(X + j + 1));
 				swap(*(Y + j), *(Y + j + 1));
-				swap(*(D + j), *(D + j + 1));
+				swap(*(D + j), *(D + j + 1));*/
 			}
 		}
 	}
