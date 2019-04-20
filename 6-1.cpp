@@ -1,6 +1,6 @@
 ﻿// ConsoleApplication76.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
 //Класс прямоугольник
-
+// мы хотим, что бы этим классом пользовался кто-то посторонний. Например, чтобы хранить у себя в классе "обувь" размер коробки. А с твоими методами я ничего сделать не могу 
 #include "pch.h"
 #include <conio.h>
 #include <iostream>
@@ -13,25 +13,25 @@ class Rectangle {
 private:
 	double x1, x2, y1, y2, dx, dy, r;
 public:
-	Rectangle(double a, double b, double c, double d) : x1(a), x2(b), y1(c), y2(d) {	}// Конструктор с 4 параметрами
-	Rectangle() : x1(2), x2(5), y1(2), y2(0) {	}// Встроенный конструктор 
+	Rectangle(double a, double b, double c, double d) : x1(a), x2(b), y1(c), y2(d) {	}// Конструктор с 4 параметрами А остальные поля - мусор?????
+	Rectangle() : x1(2), x2(5), y1(2), y2(0) {	}// Встроенный конструктор !!! уже НЕ встроенный. Ты эе его писал )))) и ОЧЕНЬ странные числа по умолчанию А остальные поля - мусор?????
 	~Rectangle() { } // Деструктор
 	void Input(); // метод ввода с клавиатуры
 	void Result(); // метод вывода на экран
-	void Peremeshenie(); // перемещение
-	void Size(); // изменение размера
-	void Minimal(); // построение минимального
-	void Сross(); // пересечение 2 прямоугольников
+	void Peremeshenie(); // перемещение. Без параметра???????? Бред!!!!!
+	void Size(); // изменение размера Без параметра???????? Бред!!!!!
+	void Minimal(); // построение минимального чего??????
+	void Сross(); // пересечение 2 прямоугольников Без параметров???????? Реально???? Бред!!!!!
 };
 
 void Rectangle::Input() {
-	cout << "Enter the x coordinate of the left points" << endl;
+	cout << "Enter the x coordinate of the left points" << endl; // вообще не понял!!!
 	cin >> x1;
-	cout << "Enter the y coordinate of the top points" << endl;
+	cout << "Enter the y coordinate of the top points" << endl;// вообще не понял!!!
 	cin >> y1;
-	cout << "Enter the x coordinate of the right points" << endl;
+	cout << "Enter the x coordinate of the right points" << endl;// вообще не понял!
 	cin >> x2;
-	cout << "Enter the y coordinate of the lower points" << endl;
+	cout << "Enter the y coordinate of the lower points" << endl;// вообще не понял!
 	cin >> y2;
 }
 
@@ -64,7 +64,7 @@ void Rectangle::Size() {
 	cout << "D:" << "(" << x1 << "," << y2 << ")" << endl;
 
 }
-void Rectangle::Minimal() {
+void Rectangle::Minimal() {// вс1, что ниже - БРЕД!!!!
 	double x3, x4, y3, y4, x_min = x1, x_max = x1, y_min = y1, y_max = y1;
 	cout << "The second rectangle:" << endl;
 	cout << "Enter the x coordinate of the left points" << endl;
