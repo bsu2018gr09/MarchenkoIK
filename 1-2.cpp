@@ -4,87 +4,96 @@
 //Положительные элементы массива А(N) переставить в конец массива, сохраняя порядок следования.//
 //Отрицательные элементы расположить в порядке убывания. Дополнительный массив не использовать.//
 
-#include "pch.h"
 #include <iostream>
-#include <time.h>
+#include <ctime>
+#include <iomanip>
 
 using namespace std;
 
-//Функции//
-void giveMemory(int*&a, int n);
-void rand(int *a, int n, int min, int max);
-void printArr(int *a, int n);
-void freeMemory(int*a);
+int* GiveMemory(int N) {
+	int* Arr = new(nothrow) int[N];
+	if (!Arr) {
+		cout << "Error!" << "\n";
+		system("pause");
+		exit(0);
+	}
+	return Arr;
+}
 
-int main()
-{
-	int n;
-	cin >> n;
-	int *a = nullptr;
-	int N{0}, cnt{0};
+void FreeMemory(int*& Arr) {
+	delete[]Arr;
+	Arr = nullptr;
+	return;
+}
 
-	printarray(arr, N); // что это????????????????? Печать a = nullptr ????????? Серьёзно?????????
-	cout << endl;
-	for (int i = N - 1; i >= 0; --i)
-	{  
-		if (*(a + i) > 0)
-		{
-			swap(*(a + i), *(a + N - 1 - cnt));
+void RandomInitArr(int* Arr, int N) {
+	int a, b;
+	cout << "Con 2 positive integers for create array:\n";
+	cout << "first number: ";
+	cin >> a;
+	cout << "second number: ";
+	cin >> b;
+	if (a <= 0 || b <= 0) {
+		cout << "It's not positive integer!\n";
+		system("pause");
+		exit(0);
+	}
+	else
+		for (int i = 0; i < N; ++i) {
+			*(Arr + i) = rand() % a - rand() % b;
+		}
+	return;
+}
+
+void PrintArr(int* Arr, int N) {
+	for (int i = 0; i < N; ++i) {
+		cout << *(Arr + i);
+	}
+	return;
+}
+void TotalSort(int* Arr, int N) {
+	int cnt = 0;
+	int flag = 0;
+	for (int i = N - 1; i >= 0; --i) {
+		if (*(Arr + i) > 0) {
+			swap(*(Arr + i), *(Arr + N - 1 - cnt));
 			cnt++;
 		}
 	}
-	for (int j = 0; j < N; ++j) 
-		for (int i = 0; i < N; ++i)
-		{
-		 	if (*(Arr + i) < *(Arr + i + 1))
-				if (*(Arr + i + 1) <= 0)
-					swap(*(Arr + i), *(Arr + i + 1));
+	for (int i = 0; i < N; ++i) {
+		for (int j = 0; j < N; ++j) {
+			if (*(Arr + j) < *(Arr + j + 1)) {
+				if (*(Arr + j + 1) <= 0) {
+					swap(*(Arr + j), *(Arr + j + 1));
+					flag++;
+				}
+			}
 		}
-	cout << endl;
-	givememory(a, n);
-	randominitarray(a, n, -5, 5);
-	printarray(a, n);
-	printarray(a, n);
-	deletememory(a);
-}
-
-//выделение памяти
-void giveMemory(int*&a, int n)
-{
-	a = new(nothrow)int[n];
-	if (!a) 
-	{
-		cout << "error" << "\n";
+		if (!flag) {break;}
 	}
+	return;
 }
 
-//рандомное заполнение
-void rand(int *a, int n, int min, int max)
-{ 
+int main() {
 	srand(time(0));
-	max++;
-	int tmp = max - min;
-	for (int i = 0; i < n; i++; ++a)
-	{
-		*(a) = rand() % tmp + min;
+	int N;
+	cout << "Cout the positive integer size of array: ";
+	cin >> N;
+	if (N <= 0) {
+		cout << "It's not positive integer!\n";
+		system("pause");
+		exit(0);
 	}
-}
-
-//печать массива
-void printArr(int*  a, int n)
-{
-	for (int i = 0; i < n; ++i)
-	{
-		cout << *(a++) << " ";
-	}
+	int*Arr = GiveMemory(N);
+	RandomInitArr(Arr, N); 
+	cout << "Starting array: \n";
+	PrintArr(Arr, N);
 	cout << '\n';
+	TotalSort(Arr, N);
+	cout << '\n';
+	cout << "Sorting array: \n";
+	PrintArr(Arr, N);
+	FreeMemory(Arr);
+	system("pause");
+	return 0;
 }
-
-//освобождение памяти
-void freeMemory(int*a)
-{
-	delete[]a;
-}
-
-
-//P.S. Функции инициализации и печати честно скоммуниждены из прошлых работ. Функция сортировки работала некорректно. Сделал так.
