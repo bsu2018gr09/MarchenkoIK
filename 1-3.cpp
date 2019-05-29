@@ -1,68 +1,110 @@
 ﻿// третья задача на 27.02.2019.cpp
 //Элементы массива А(N), значения которых – простые числа, расположить в порядке возрастания, не нарушая порядка следования других элементов.
-#include "pch.h"
 #include <iostream>
-#include <cmath>
+#include <clocale>
+#include <ctime>
+#include <iomanip>
+
 using namespace std;
 
-void RandomArray(int *arr, int n)
-{
-	cout << "\n Array of prime nubers in [1;100]:\n\n";
-	for (int i = 0; i < n; i++)
-	{
-		arr[i] = rand() % 100 + 1;
-		cout << "  " << arr[i];
+int* GiveMemory(int N) {
+	int* Arr = new(nothrow) int[N];
+	if (!Arr) {
+		cout << "Error!" << "\n";
+		system("pause");
+		exit(0);
 	}
+	return Arr;
 }
 
-void SortPrimes(int *arr, int n)
-{
-	int *primes = new int[n], k = 0;
+void FreeMemory(int*& Arr) {
+	delete[]Arr;
+	Arr = nullptr;
+	return;
+}
 
-	for (int i = 0; i < n; i++)      // Поиск в arr простых чисел и их запись в primes
+void RandomInitArr(int* Arr, int N) {
+	int a, b;
+	cout << "Con 2 positive integers for create array:\n";
+	cout << "first number: ";
+	cin >> a;
+	cout << "second number: ";
+	cin >> b;
+	if (a <= 0 || b <= 0) {
+		cout << "It's not positive integer!\n";
+		system("pause");
+		exit(0);
+	}
+	else
+		for (int i = 0; i < N; ++i) {
+			*(Arr + i) = rand() % a - rand() % b;
+		}
+	return;
+}
+
+void PrintArr(int* Arr, int N) {
+	for (int i = 0; i < N; ++i) {
+		cout << *(Arr + i);
+	}
+	return;
+}
+
+bool PrimeNumber(int N)
+{
+	if (N <= 1)
 	{
-		int a = arr[i];
-		if (a % 2 != 0 || a == 2)
+		return false;
+	}
+	bool isPrime = true;
+	for (int i = 2; i <= sqrt(N); ++i)
+	{
+		if (N%i == 0)
 		{
-			float root = sqrt((float)a);
-			int j = 2;
-			while (j <= root && a % j != 0) j++;
-			if (j > root) primes[k++] = a;
+			isPrime = false;
+			break;
 		}
 	}
+	return isPrime;
+}
 
-	if (k == 0) cout << "\n\nArray have not prime numbers.\n";
-	else
-	{
-		for (int i = 0; i < k; i++)      // Сортировка "пузырьком" primes
-		{
-			for (int j = 0; j < k - i - 1; j++)
-			{
-				if (primes[j] > primes[j + 1])
-				{
-					int t = primes[j];
-					primes[j] = primes[j + 1];
-					primes[j + 1] = t;
+void TotalSort(int *Arr, int N) {
+	char flag{ 0 };
+	for (int i = 0; i < N; ++i) {
+		if (PrimeNumber(*(Arr + i))) {
+			flag = 0;
+			for (int j = 0; j < N; ++j) {
+				if (PrimeNumber(*(Arr + j)) && *(Arr + i) < *(Arr + j)) {
+					swap(*(Arr + i), *(Arr + j));
+					flag++;
 				}
 			}
+			if (!flag) {break;}
 		}
-		cout << "\n\nPrime numbers of array in vozrastanie:\n\n";// а зачем мне это???? Мне надо было ИСХОДНЫЙ массив "пересортировать"
-		for (int i = 0; i < k; i++) cout << "  " << primes[i];
 	}
-
+	return;
 }
 
-int main()
-{
-
-	cout << "Size of array:\n  ";
-	int n; cin >> n;
-
-	int *arr = new int[n];//где проверка
-
-	RandomArray(arr, n);
-	SortPrimes(arr, n);
-
-	system("pause > null");
+int main() {
+	srand(time(0));
+	int N;
+	cout << "Cout the positive integer size of array: ";
+	cin >> N;
+	if (N <= 0) {
+		cout << "It's not positive integer!\n";
+		system("pause");
+		exit(0);
+	}
+	int*Arr = GiveMemory(N);
+	RandomInitArr(Arr, N);
+	cout << "Starting array: \n";
+	PrintArr(Arr, N);
+	TotalSort(Arr, N);
+	cout << "\n";
+	cout <<  "Sorting array: \n";
+	PrintArr(Arr, N);
+	cout << "\n";
+	FreeMemory(Arr);
+	system("pause");
 	return 0;
 }
+
